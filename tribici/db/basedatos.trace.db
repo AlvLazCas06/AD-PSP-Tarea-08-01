@@ -1,8 +1,0 @@
-2026-01-08 13:55:50.542804+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create global temporary table HTE_bicycle(rn_ integer not null, id bigint, brand varchar(255), model varchar(255), status enum ([*]), primary key (rn_)) TRANSACTIONAL"; se esperaba "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
-Syntax error in SQL statement "create global temporary table HTE_bicycle(rn_ integer not null, id bigint, brand varchar(255), model varchar(255), status enum ([*]), primary key (rn_)) TRANSACTIONAL"; expected "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
-create global temporary table HTE_bicycle(rn_ integer not null, id bigint, brand varchar(255), model varchar(255), status enum (), primary key (rn_)) TRANSACTIONAL [42001-232]
-2026-01-08 13:55:50.706831+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table bicycle (id bigint not null, brand varchar(255), model varchar(255), status enum ([*]), primary key (id))"; se esperaba "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
-Syntax error in SQL statement "create table bicycle (id bigint not null, brand varchar(255), model varchar(255), status enum ([*]), primary key (id))"; expected "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
-create table bicycle (id bigint not null, brand varchar(255), model varchar(255), status enum (), primary key (id)) [42001-232]
