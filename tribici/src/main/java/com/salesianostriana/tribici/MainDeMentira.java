@@ -5,6 +5,10 @@ import com.salesianostriana.tribici.repository.BicycleRepository;
 import com.salesianostriana.tribici.repository.StationRepository;
 import com.salesianostriana.tribici.repository.UseRepository;
 import com.salesianostriana.tribici.repository.UserRepository;
+import com.salesianostriana.tribici.service.BicycleService;
+import com.salesianostriana.tribici.service.StationService;
+import com.salesianostriana.tribici.service.UseService;
+import com.salesianostriana.tribici.service.UserService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,57 +16,27 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class MainDeMentira {
 
-    private final UserRepository userRepository;
-    private final StationRepository stationRepository;
-    private final BicycleRepository bicycleRepository;
-    private final UseRepository useRepository;
+    private final UserService userService;
+    private final UseService useService;
+    private final BicycleService bicycleService;
+    private final StationService stationService;
 
     @PostConstruct
     public void run() {
-        User user = User.builder()
-                .name("")
-                .numCard("")
-                .pin("")
-                .balance(new BigDecimal(0))
-                .build();
-        user = userRepository.save(user);
         Station station = Station.builder()
-                .name("")
-                .capacity(2)
-                .coordinates("")
-                .number(21)
+                .name("Plaza de armas")
+                .coordinates("12, 0")
+                .number(1)
+                .capacity(1)
                 .build();
-        station = stationRepository.save(station);
-        Bicycle bicycle = Bicycle.builder()
-                .brand("")
-                .model("")
-                .status(Status.NEW)
-                .station(station)
-                .build();
-        bicycle = bicycleRepository.save(bicycle);
-        station.getBicycles().add(bicycle);
-        Use use = Use.builder()
-                .startDate(LocalDate.now())
-                .finishDate(LocalDate.now())
-                .cost(new BigDecimal(0))
-                .bicycle(bicycle)
-                .user(user)
-                .station(station)
-                .build();
-        use = useRepository.save(use);
-        user.getUses().add(use);
-        bicycle.getUses().add(use);
-        station.getUses().add(use);
-
-        log.info(user.getUses().toString());
-        log.info(station.getBicycles().toString());
-        log.info(bicycle.getUses().toString());
+        log.info(stationService.saveStation(station).toString());
     }
 
 }

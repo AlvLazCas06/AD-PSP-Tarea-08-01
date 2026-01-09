@@ -1,9 +1,6 @@
 package com.salesianostriana.tribici.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -21,13 +18,15 @@ import java.util.Objects;
 public class Station {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int number;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String coordinates;
 
     private int capacity;
@@ -36,11 +35,6 @@ public class Station {
     @ToString.Exclude
     @Builder.Default
     private List<Bicycle> bicycles = new ArrayList<>();
-
-    @OneToMany(mappedBy = "station")
-    @ToString.Exclude
-    @Builder.Default
-    private List<Use> uses = new ArrayList<>();
 
     @Override
     public final boolean equals(Object o) {
@@ -56,6 +50,16 @@ public class Station {
     @Override
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
+
+    public void addBicycle(Bicycle bicycle) {
+        this.bicycles.add(bicycle);
+        bicycle.setStation(this);
+    }
+
+    public void removeBicycle(Bicycle bicycle) {
+        bicycles.remove(bicycle);
+        bicycle.setStation(null);
     }
 
 }

@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Bicycle {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String brand;
@@ -29,12 +29,9 @@ public class Bicycle {
     private Status status;
 
     @ManyToOne
+    @JoinColumn(name = "station_id",
+            foreignKey = @ForeignKey(name = "fk_bicycle_station"))
     private Station station;
-
-    @OneToMany(mappedBy = "bicycle")
-    @ToString.Exclude
-    @Builder.Default
-    private List<Use> uses = new ArrayList<>();
 
     @Override
     public final boolean equals(Object o) {

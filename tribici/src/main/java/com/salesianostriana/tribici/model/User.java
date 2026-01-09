@@ -20,7 +20,7 @@ import java.util.Objects;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -31,11 +31,6 @@ public class User {
     private String pin;
 
     private BigDecimal balance;
-
-    @OneToMany(mappedBy = "user")
-    @Builder.Default
-    @ToString.Exclude
-    private List<Use> uses = new ArrayList<>();
 
     @Override
     public final boolean equals(Object o) {
